@@ -1,0 +1,111 @@
+# Konfigurace kontrol T8 (GitHub Actions, guilda Git, CI/CD a governance).
+# Jeden soubor pro obě kontroly: názvy tabulek a povinné sekce README.
+# Změny tohoto souboru jdou přes Pull Request a schvaluje je guilda.
+
+[tables]
+# Kde hledat definice Fabric položek (složka propojená s workspace).
+scan_dir = "fabric"
+
+# Povolené prefixy podle vrstvy. bronze_ a silver_ jsou ze zadání guildy.
+# log_ je návrh pro technické tabulky (log běhů); o jeho přijetí rozhoduje guilda.
+allowed_prefixes = ["bronze_", "silver_", "log_"]
+
+# Celý název tabulky: jen malá písmena, číslice a podtržítka.
+name_pattern = "^[a-z][a-z0-9_]*$"
+
+# true = i název, který nejde ověřit staticky (např. saveAsTable(promenna)), shodí kontrolu.
+# false = takový případ je jen varování.
+strict = false
+
+[readme]
+path = "README.md"
+
+# Minimální počet znaků obsahu pod nadpisem (bez podnadpisů a mezer),
+# aby sekce nebyla jen prázdný nadpis.
+min_content_chars = 40
+
+# Slova, která v sekci znamenají „ještě není hotové“.
+placeholders = ["todo", "tbd", "doplnit", "doplnime", "doplníme", "lorem ipsum"]
+
+# Povinné sekce. Sekce je splněná, když nějaký nadpis (# až ######) obsahuje
+# alespoň jedno z klíčových slov. Porovnává se bez diakritiky a velikosti písmen,
+# slovo musí začínat na začátku slova („licenc“ najde „Licence“ i „licencí“).
+# level = "error" shodí kontrolu, "warning" jen upozorní (sekce pro pozdější milníky).
+# Seznam je potřeba sladit se šablonou README od T7.
+
+[[readme.sections]]
+id = "tym"
+title = "Tým a role"
+keywords = ["tym", "team", "role", "clenove"]
+level = "error"
+source = "Zadání: Organizace týmu a role"
+
+[[readme.sections]]
+id = "architektura"
+title = "Architektura a struktura workspace"
+keywords = ["architektur", "struktur", "workspace"]
+level = "error"
+source = "Zadání: výstupy role Tech lead (architektonický diagram, README)"
+
+[[readme.sections]]
+id = "konvence"
+title = "Konvence pojmenování"
+keywords = ["konvenc", "pojmenovani", "naming"]
+level = "warning"
+source = "Zadání: výstupy role Tech lead (konvence)"
+
+[[readme.sections]]
+id = "zdroje"
+title = "Datové zdroje a licence"
+keywords = ["licenc", "zdroj"]
+level = "error"
+source = "Zadání, Pravidla: u každého externího zdroje licence a odkaz"
+
+[[readme.sections]]
+id = "bronze"
+title = "Ingest a Bronze"
+keywords = ["bronze", "ingest"]
+level = "error"
+source = "Zadání: Architektura a požadované výstupy"
+
+[[readme.sections]]
+id = "kontrola_poctu"
+title = "Kontrola počtů řádků zdroj a Bronze"
+keywords = ["kontrola poctu", "pocty radku", "pocet radku", "row count"]
+level = "error"
+source = "Milník 1, úkol 3: výsledek srovnání zapište do README"
+
+[[readme.sections]]
+id = "silver"
+title = "Silver a pravidla čištění"
+keywords = ["silver", "cisteni"]
+level = "error"
+source = "Milník 1, úkol 4: pravidla čištění pro každou tabulku popište v README"
+
+[[readme.sections]]
+id = "dq"
+title = "Kvalita dat (DQ)"
+keywords = ["dq", "kvalit", "data quality"]
+level = "error"
+source = "Zadání: Silver, DQ pravidla s karanténou; Usage, důvěryhodnost"
+
+[[readme.sections]]
+id = "sber_kapacita"
+title = "Průběžný sběr dat a zdůvodnění kapacity"
+keywords = ["sber", "kapacit", "interval", "frekvenc"]
+level = "warning"
+source = "Zadání: Průběžný sběr dat, veškerá zdůvodnění zapište do README"
+
+[[readme.sections]]
+id = "osobni_udaje"
+title = "Osobní údaje a pseudonymizace"
+keywords = ["osobni udaj", "pseudonymiz", "gdpr", "pristup"]
+level = "warning"
+source = "Zadání: Pravidla, Osobní údaje; Accessibility, matice rolí"
+
+[[readme.sections]]
+id = "ai"
+title = "Použití AI asistentů"
+keywords = ["ai", "umela inteligence", "copilot", "asistent"]
+level = "error"
+source = "Zadání, Pravidla: v README uveďte, k čemu jste AI použili"

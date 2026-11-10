@@ -1,1 +1,38 @@
-* @krystofjelinek @vojtechanton @markp-R2D2 @VolodymyrKaznacheiev @d1fum
+# ==============================================================================
+# CODEOWNERS pro projekt MS Fabric – DPP Data Platform
+# Formát: <cesta> <vlastník1> <vlastník2>
+# ==============================================================================
+
+# Celý repozitář má výchozího vlastníka (Tech Lead / správce repozitáře)
+*                   @gh-techlead
+
+# ------------------------------------------------------------------------------
+# Ingest & Bronze vrstva (Interní DB, Azure SQL, API, OpenData)
+# ------------------------------------------------------------------------------
+# Notebooky a pipelines pro ingest ze zdrojů do Bronze
+fabric/**/bronze*                       @gh-ingest-interni @gh-ingest-externi
+fabric/**/*.DataPipeline/               @gh-ingest-interni @gh-ingest-externi
+fabric/**/*.Notebook/notebook-content.* @gh-techlead
+
+# ------------------------------------------------------------------------------
+# Silver vrstva & Datové transformace
+# ------------------------------------------------------------------------------
+# Notebooky pro čištění, deduplikaci, SCD2 a tvorbu Silver tabulek
+fabric/**/silver*                       @gh-silver-engineer @gh-techlead
+fabric/**/transformations/              @gh-silver-engineer
+
+# ------------------------------------------------------------------------------
+# Governance, Kvalita dat (DQ) a Bezpečnost
+# ------------------------------------------------------------------------------
+# Kontroly kvality, karanténa, pseudonymizace a datové kontrakty
+fabric/**/dq*                           @gh-dataops-governance
+fabric/**/governance/                   @gh-dataops-governance
+fabric/**/security/                     @gh-dataops-governance
+
+# ------------------------------------------------------------------------------
+# Git, CI/CD a Dokumentace projektu
+# ------------------------------------------------------------------------------
+# CI/CD workflows, GitHub šablony a správa repozitáře
+.github/                                @gh-techlead @gh-dataops-governance
+.github/workflows/                      @gh-techlead
+README.md                               @gh-techlead @gh-dataops-governance
