@@ -1,0 +1,14 @@
+# Konfigurace Ruff pro lint notebooků Fabricu (T8, GitHub Actions).
+# Spouští se z workflow: ruff check fabric --config .github/ruff.toml
+
+target-version = "py312"
+
+# Notebooky mívají dlouhé SQL dotazy a cesty, délku řádku nehlídáme.
+line-length = 200
+
+# Objekty, které Fabric v notebooku vytvoří sám. Bez nich hlásí Ruff F821 (nedefinovaný název).
+builtins = ["spark", "sc", "notebookutils", "mssparkutils", "display"]
+
+[lint]
+# Výchozí sada Ruffu: syntaktické chyby, nedefinované a nepoužité názvy, zjevné chyby.
+select = ["E4", "E7", "E9", "F"]
