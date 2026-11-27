@@ -1,4 +1,4 @@
-name: T8 PR checks
+name: Gitleaks review
 
 on:
   pull_request:
@@ -24,3 +24,75 @@ jobs:
           GITLEAKS_ENABLE_COMMENTS: "false"
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
           GITLEAKS_ENABLE_SUMMARY: "false"
+
+  # Notebooky a README squadu kontrolujeme jen v repozitáři squadu (má složku fabric/).
+  # V repozitáři guildy se tyto kontroly přeskočí, Gitleaks běží všude.
+  detect:
+    name: Repozitář squadu?
+    runs-on: ubuntu-latest
+    outputs:
+      squad: ${{ steps.detect.outputs.squad }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - id: detect
+        run: |
+          if [ -d fabric ]; then
+            echo "squad=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "squad=false" >> "$GITHUB_OUTPUT"
+            echo "Složka fabric/ v repozitáři není, kontroly notebooků a README se přeskočí." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  lint-notebooks:
+    name: Ruff (lint notebooků)
+    needs: detect
+    if: needs.detect.outputs.squad == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - run: pip install ruff==0.17.6
+
+      # Fabric ukládá notebooky jako notebook-content.py, Ruff je čte jako běžný Python.
+      - run: ruff check fabric --config .github/ruff.toml --output-format github
+
+  table-names:
+    name: Názvy tabulek
+    needs: detect
+    if: needs.detect.outputs.squad == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - run: python .github/scripts/check_table_names.py
+
+  readme-sections:
+    name: Povinné sekce README
+    needs: detect
+    if: needs.detect.outputs.squad == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - run: python .github/scripts/check_readme_sections.py
