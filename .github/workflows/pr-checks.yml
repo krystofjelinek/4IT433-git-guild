@@ -1,4 +1,4 @@
-name: T8 PR checks
+name: Gitleaks review
 
 on:
   pull_request:
