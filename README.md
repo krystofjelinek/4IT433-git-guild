@@ -1,143 +1,75 @@
-# 4IT433-git-guild
-Repo used for sharing methodology of work with Git during 4IT433 course
+# Git Guild — Data Engineering (4IT433)
 
-# Konvence pro commity
+Repozitář sdílí pravidla a šablony pro týmovou práci s GitHubem v předmětu Data Engineering. Obsahuje také návrh pravidel Data governance pro projekt Pražská doprava (DPP) v Microsoft Fabric.
 
-## Základní formát
+## Stav
 
-```text
-<typ>[volitelný rozsah][!]: <stručný popis>
+| Milník | Stav | Poznámka |
+|---|---|---|
+| Pravidla práce s Gitem | ✅ | Základní workflow je popsáno níže a v dokumentaci v `standards/`. |
+| Data governance – DPP | ✅ | Návrh pravidel je v [`standards/data_governance.md`](standards/data_governance.md). |
 
-[volitelné tělo zprávy]
+## Prostředí
 
-[volitelné patičky]
-```
+| Položka | Hodnota |
+|---|---|
+| Platforma | GitHub |
+| Git větev pro vývoj | `dev` |
+| Hlavní větev | `main` (změny pouze přes Pull Request) |
+| Pravidla a šablony | `standards/`, `templates/` |
 
-- **Typ** určuje druh změny.
-- **Rozsah (scope)** upřesňuje část projektu, například `auth`, `api` nebo `ui`.
-- **Popis** stručně vystihuje změnu.
-- **Tělo** může vysvětlit důvod a kontext změny.
-- **Patičky** mohou obsahovat reference na úkoly a informace o nekompatibilních změnách.
+## Architektura
 
-Příklad:
-
-```text
-feat(auth): přidání přihlášení pomocí Google
-
-Uživatelé se nyní mohou přihlásit pomocí svého Google účtu.
-```
-
-## Typy commitů
-
-Specifikace přímo definuje typy `feat` a `fix`. Další typy jsou rozšířenou týmovou konvencí.
-
-| Typ | Význam | Použití |
-| --- | --- | --- |
-| `feat` | Nová funkce | Přidání funkcionality |
-| `fix` | Oprava chyby | Oprava nesprávného chování |
-| `docs` | Dokumentace | README, návody a dokumentace |
-| `style` | Formátování | Odsazení, mezery, formátování bez změny chování |
-| `refactor` | Refaktoring | Změna struktury bez změny chování |
-| `perf` | Výkon | Optimalizace výkonu |
-| `test` | Testy | Přidání a úpravy testů |
-| `build` | Sestavení | Závislosti a build nástroje |
-| `ci` | CI/CD | Pipeline a automatizace |
-| `chore` | Údržba | Rutinní technické změny |
-| `revert` | Vrácení změny | Vrácení dřívějšího commitu |
-
-## Příklady v češtině
+Tento repozitář slouží jako dokumentační a metodická podpora pro týmovou práci. Neobsahuje implementaci datových pipeline ani Fabric workspace artefakty.
 
 ```text
-feat(auth): přidání dvoufaktorového ověřování
-fix(api): oprava chybného zpracování odpovědi
-docs(readme): aktualizace instalačního návodu
-style(ui): sjednocení formátování komponent
-refactor(user): zjednodušení validace uživatele
-perf(db): optimalizace databázových dotazů
-test(auth): doplnění testů přihlašování
-build(deps): aktualizace závislostí
-ci(github): přidání automatického spouštění testů
-chore(config): odstranění nepoužívaných nastavení
-revert: vrácení změny přihlašovacího formuláře
+README.md
+standards/   pravidla a standardy
+templates/   opakovaně použitelné šablony
 ```
 
-## Nekompatibilní změny (BREAKING CHANGE)
+## Konvence
 
-Změnu narušující zpětnou kompatibilitu označte `!` bezprostředně před dvojtečkou nebo patičkou `BREAKING CHANGE:`. Obě možnosti lze kombinovat.
+| Co | Pravidlo | Příklad |
+|---|---|---|
+| Dokumentace | Markdown (`.md`) | `standards/pr_checks.md` |
+| Názvy souborů | Výstižné, malá písmena, podtržítka dle potřeby | `data_governance.md` |
+| Commit | Stručně popsat změnu; doporučený formát je v [pravidlech commitů](standards/commit.md) | `docs: doplnění pravidel` |
+| Pull Request | Změny připravit ve větvi `dev`; do `main` přes Pull Request a code review | `dev` → `main` |
+
+## Struktura repozitáře
 
 ```text
-feat(api)!: odstranění zastaralého endpointu
+standards/
+  commit.md
+  data_governance.md
+  pr_checks.md
+  table_names_and_README.md
+templates/
+  README_template.md
+README.md
 ```
 
-Podrobnější příklad:
+## Kvalita dokumentace
 
-```text
-feat(api): změna struktury odpovědi uživatele
+- Dokumenty ukládají pravidla a rozhodnutí přehledně v Markdownu.
+- Změny pravidel se verzují v Gitu a procházejí code review přes Pull Request.
+- Projektová README vycházejí ze [šablony README](templates/README_template.md).
 
-Odpověď API nyní používá objekt profile místo původních polí.
+## Jak přispívat
 
-BREAKING CHANGE: klienti musí upravit zpracování odpovědi endpointu /users.
-```
+1. Změny připravte ve větvi `dev`.
+2. Otevřete Pull Request do `main`.
+3. Zajistěte code review jiným členem týmu; po schválení lze změnu sloučit.
 
-Patička `BREAKING CHANGE:` musí být napsána přesně tímto způsobem. Lze použít také `BREAKING-CHANGE:` jako token patičky podle pravidel specifikace.
+## Bezpečnost a přístupy
 
-## Verzování podle SemVer
+Pro pravidla klasifikace dat, ochrany PII, pseudonymizace a správy tajemství v projektu DPP viz [Data governance](standards/data_governance.md).
 
-| Změna | Navýšení verze | Příklad |
-| --- | --- | --- |
-| `fix` | PATCH | `1.2.3` → `1.2.4` |
-| `feat` | MINOR | `1.2.3` → `1.3.0` |
-| `BREAKING CHANGE` | MAJOR | `1.2.3` → `2.0.0` |
+## Známá omezení a otevřené úlohy
 
-Poznámka: u verzí `0.x.y` může být způsob verzování odlišný. Automatické vydávání verzí závisí na nástrojích projektu.
+- Informace specifické pro jednotlivé týmové projekty (workspace, členové, zdroje a průběh milníků) patří do jejich projektového README.
 
-## Doporučená týmová pravidla
+## Tým a kontakt
 
-1. Každá commit zpráva začíná typem, například `feat:` nebo `fix:`.
-2. Typy a názvy oblastí ponecháváme v angličtině, popisy píšeme česky.
-3. Rozsah uvádíme, pokud pomáhá určit dotčenou část projektu.
-4. Jeden commit představuje jednu logickou změnu.
-5. Popis je konkrétní: nepoužíváme jen `opravy`, `update`, `změny` nebo `hotovo`.
-6. U složitějších změn přidáváme tělo vysvětlující **co** a **proč**.
-7. Nekompatibilní změny označujeme `!` nebo patičkou `BREAKING CHANGE:`.
-8. Typy zapisujeme malými písmeny; konzistenci názvů oblastí stanoví tým.
-9. Za prefixem a dvojtečkou následuje jedna mezera.
-10. Prázdný řádek odděluje hlavičku od těla a tělo od patiček.
-
-## Šablona k použití
-
-```text
-<typ>(<oblast>): <stručný popis>
-
-<co se změnilo a proč – nepovinné>
-
-Refs: #123
-```
-
-Příklad s referencí na úkol:
-
-```text
-fix(cart): oprava výpočtu ceny po slevě
-
-Při kombinaci procentní a pevné slevy docházelo k chybnému zaokrouhlení.
-
-Refs: #123
-```
-
-`Refs: #123` je volitelná týmová konvence; není povinnou součástí Conventional Commits.
-
-## Rychlý tahák
-
-- Nová funkce → `feat`
-- Oprava chyby → `fix`
-- Dokumentace → `docs`
-- Refaktoring → `refactor`
-- Výkon → `perf`
-- Testy → `test`
-- Údržba → `chore`
-- Nekompatibilní změna → `!` nebo `BREAKING CHANGE:`
-
----
-
-**Zdroj:** [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/). Dokument kombinuje požadavky specifikace a doporučené týmové postupy.
-
+Repozitář spravuje Git Guild pro předmět 4IT433. S dotazy se obraťte na [Teams kanál Git Guild](https://teams.cloud.microsoft/l/channel/19%3Ab183a764649b45c7bd96fc0870ef1004%40thread.tacv2/Odpoledni_Git%2C%20CI%2CCD%20a%20governance?groupId=f42500c7-8406-4492-82b1-2528e81665cb&tenantId=2b51a4b3-443f-4406-8ca4-19056a79a444).
