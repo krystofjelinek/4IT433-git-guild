@@ -18,7 +18,7 @@
 ## 3. Správa tajemství a bezpečnost
 
 - Hesla, API klíče, tokeny, connection stringy ani soli se neukládají do kódu, notebooků, parametrů pipeline ani Gitu.
-- Tajemství se spravují prostřednictvím **Fabric connections** nebo **Azure Key Vault**.
+- Konfigurační a citlivé hodnoty potřebné v notebooku se spravují ve **Fabric Variable Library**; pro přístup ke zdrojům se používají také **Fabric connections**. Oprávnění k Variable Library se omezí na důvěryhodné členy týmu. Variable Library může být synchronizována s Gitem včetně hodnot, proto knihovnu s reálnými tajemstvími necommitujte ani nesynchronizujte do repozitáře.
 - **AI asistenti:** jsou povoleni pouze mimo Fabric (v prohlížeči nebo editoru); Copilot přímo ve Fabricu je zakázán. Použití AI se zaznamená v `README.md` a tým odpovídá za výsledný kód.
 
 ## 4. Kvalita dat, logování a kapacita

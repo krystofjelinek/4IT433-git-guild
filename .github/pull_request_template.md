@@ -14,7 +14,7 @@
 
 ## 🔍 Checklist pro autora před předáním k review
 - [ ] Větev směřuje z `dev` do `main` (nebo z feature větve do `dev`).
-- [ ] Kód **neobsahuje žádná tajemství** (API tokeny, hesla, connection stringy) – jsou využity Fabric Connections / Azure Key Vault.
+- [ ] Kód **neobsahuje žádná tajemství** (API tokeny, hesla, connection stringy) – používají se Fabric Connections / Variable Library s omezenými oprávněními.
 - [ ] V commitu jsou **pouze definice a kód** (notebooky, konfigurace pipeline, JSON definice položek), **žádná surová ani zpracovaná data**.
 - [ ] Názvy tabulek dodržují konvence: malá písmena s prefixem vrstvy (`bronze_*`, `silver_*`).
 - [ ] README.md bylo aktualizováno (zdokumentovaná pravidla čištění, srovnání počtu řádků, licence externích zdrojů).

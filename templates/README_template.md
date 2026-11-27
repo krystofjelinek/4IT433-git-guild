@@ -130,7 +130,7 @@ Pravidla po tabulkách:
 
 ## Bezpečnost a přístupy
 
-- V kódu nejsou žádné tajné údaje ani ID prostředí. Tajné klíče jsou v Azure Key Vault.
+- V kódu nejsou žádné tajné údaje ani ID prostředí. Citlivé hodnoty jsou ve Fabric Variable Library s omezenými oprávněními; její hodnoty se nesmí dostat do synchronizovaného Gitu.
 - Osobní údaje: které sloupce, jak se s nimi zachází.
 - Kdo má jakou roli ve workspace.
 
