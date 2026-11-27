@@ -6,8 +6,8 @@ Při každém Pull Requestu do `main` spustí workflow `.github/workflows/pr-che
 |---|---|---|---|
 | Gitleaks | [gitleaks-action](https://github.com/gitleaks/gitleaks-action) | API klíče, tokeny a hesla v kódu i v historii commitů v PR | najde tajný údaj |
 | Ruff (lint notebooků) | [Ruff](https://docs.astral.sh/ruff/) | Python a PySpark v `fabric/**/notebook-content.py` | syntaktická chyba, nedefinovaný nebo nepoužitý název |
-| Názvy tabulek | `.github/scripts/check_table_names.py` | prefix vrstvy `bronze_`/`silver_` a tvar názvu | viz [T8_nazvy_tabulek_a_README.md](T8_nazvy_tabulek_a_README.md) |
-| Povinné sekce README | `.github/scripts/check_readme_sections.py` | že README má všechny povinné sekce a jsou vyplněné | viz [T8_nazvy_tabulek_a_README.md](T8_nazvy_tabulek_a_README.md) |
+| Názvy tabulek | `.github/scripts/check_table_names.py` | prefix vrstvy `bronze_`/`silver_` a tvar názvu | viz [standard názvů tabulek a sekcí README](table_names_and_README.md) |
+| Povinné sekce README | `.github/scripts/check_readme_sections.py` | že README má všechny povinné sekce a jsou vyplněné | viz [standard názvů tabulek a sekcí README](table_names_and_README.md) |
 
 Ruff, názvy tabulek a README běží jen v repozitáři squadu, tedy tam, kde je složka `fabric/`. V repozitáři guildy se přeskočí a běží jen Gitleaks.
 

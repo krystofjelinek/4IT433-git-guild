@@ -63,6 +63,14 @@ README.md
 
 Osobní pokusy a ukázky z hodin nepatří do `fabric/` ve větvi `dev`.
 
+## Datové zdroje a licence
+
+U každého zdroje uveďte vlastníka, odkaz na data, licenci/podmínky použití a způsob přístupu.
+
+| Zdroj | Data / tabulky | Odkaz | Licence a podmínky | Způsob přístupu |
+|---|---|---|---|---|
+| | | | | |
+
 ## Bronze – načtení
 
 - **Zdroj:** …
@@ -101,6 +109,12 @@ Pravidla po tabulkách:
   ```sql
   SELECT TOP 20 * FROM dbo.ops_run_log ORDER BY started_at DESC;
   ```
+
+## Průběžný sběr dat a kapacita
+
+- **Interval / frekvence sběru:** …
+- **Zdůvodnění frekvence a spotřeby kapacity:** …
+- **Omezení zdroje nebo kapacity:** …
 
 ## Jak spustit
 
@@ -141,4 +155,4 @@ Pravidla po tabulkách:
 
 ## Použití AI
 
-Které nástroje, k čemu, a že výsledky tým ověřil.
+Uveďte použité nástroje, k čemu byly použity a jak tým ověřil jejich výstupy. Pokud AI použita nebyla, uveďte to.
